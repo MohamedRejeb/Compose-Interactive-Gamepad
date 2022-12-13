@@ -1,23 +1,17 @@
 package com.mohamedbenrejeb.menuinteraction
 
 import androidx.compose.animation.core.Animatable
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,11 +19,9 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.mohamedbenrejeb.menuinteraction.shapes.DrawShape
 import com.mohamedbenrejeb.menuinteraction.ui.theme.MenuInteractionTheme
-import com.mohamedbenrejeb.menuinteraction.ui.theme.PsBlue
 import kotlinx.coroutines.launch
 import kotlin.math.*
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalComposeUiApi::class)
 @Composable
 fun HomeScreen() {
     val scope = rememberCoroutineScope()
@@ -42,30 +34,6 @@ fun HomeScreen() {
     // Drag offset
     val offsetX = remember { Animatable(0f) }
     val offsetY = remember { Animatable(0f) }
-    var pressed by remember { mutableStateOf(false) }
-    var gesture by remember { mutableStateOf("") }
-
-    // Vertical Swipe
-//    val verticalSwipeableState = rememberSwipeableState(0)
-//    val verticalAnchors = mapOf(0f to 0, -swipeSizePx to 1, swipeSizePx to 2)
-    // Height changes depending on swipe
-//    val additionalHeightPx = offsetY.value
-//    val additionalHeight = with(LocalDensity.current) {
-//        (abs(additionalHeightPx).roundToInt()).toDp()
-//    }
-//    val height = buttonSize + additionalHeight
-
-    // Horizontal Swipe
-//    val horizontalSwipeableState = rememberSwipeableState(0)
-//    val horizontalAnchors = mapOf(0f to 0, -swipeSizePx to 1, swipeSizePx to 2)
-    // Width changes depending on swipe
-//    val additionalWidthPx = offsetX.value
-//    val additionalWidth = with(LocalDensity.current) {
-//        (abs(additionalWidthPx).roundToInt()).toDp()
-//    }
-//    val width = buttonSize + additionalWidth
-//
-//    var selectedBox by remember { mutableStateOf("") }
 
     var isDragging by remember { mutableStateOf(false) }
 
@@ -77,8 +45,6 @@ fun HomeScreen() {
             offset = Offset(offsetX.value, offsetY.value),
             buttonSizePx = buttonSizePx
         )
-
-        gesture = "new pos $newPosition "
 
         currentPosition = newPosition
     }
