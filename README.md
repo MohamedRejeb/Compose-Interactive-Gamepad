@@ -2,7 +2,7 @@
 
 # Compose Interactive Gamepad
 
-Android app made using jetpack compose contains an interactive gamepad with animation and drag gesture.
+Android app made using jetpack compose that contains an interactive gamepad with animation and drag gesture.
 
 
 
