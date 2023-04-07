@@ -14,8 +14,10 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.mohamedbenrejeb.menuinteraction.shapes.DrawShape
 import com.mohamedbenrejeb.menuinteraction.ui.theme.MenuInteractionTheme
@@ -24,8 +26,13 @@ import kotlin.math.*
 
 @Composable
 fun HomeScreen() {
+    // Support RTL
+    val layoutDirection = LocalLayoutDirection.current
+    val directionFactor = if (layoutDirection == LayoutDirection.Rtl) -1 else 1
+
     val scope = rememberCoroutineScope()
     val buttonSize = 90.dp
+
 
     // Swipe size in px
     val buttonSizePx = with(LocalDensity.current) { buttonSize.toPx() }
@@ -51,7 +58,7 @@ fun HomeScreen() {
 
     Box(
         modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
 
         Column(
@@ -127,7 +134,7 @@ fun HomeScreen() {
                                     change.consume()
 
                                     scope.launch {
-                                        val newOffsetX = offsetX.value + dragAmount.x
+                                        val newOffsetX = offsetX.value + dragAmount.x * directionFactor
                                         val newOffsetY = offsetY.value + dragAmount.y
 
                                         if (
